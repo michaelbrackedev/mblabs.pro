@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+// The ported design markup, generated at build time by tools/transform.mjs.
+// `?raw` inlines the file contents into the bundle at build time.
+import body from '../generated/body.html?raw';
+---
+
+<Layout>
+  <Fragment set:html={body} />
+
+  <!-- Accent tweak panel (mirrors the design's Tweaks). White is the locked default. -->
+  <div class="mb-tweaks" role="group" aria-label="Accent colour">
+    <button data-accent="#FFFFFF" aria-pressed="true" title="White" style="background:#FFFFFF;color:#FFFFFF;"></button>
+    <button data-accent="#C7F23C" aria-pressed="false" title="Lime" style="background:#C7F23C;color:#C7F23C;"></button>
+    <button data-accent="#26D4FF" aria-pressed="false" title="Cyan" style="background:#26D4FF;color:#26D4FF;"></button>
+    <button data-accent="#FF5C28" aria-pressed="false" title="Orange" style="background:#FF5C28;color:#FF5C28;"></button>
+  </div>
+
+  <script>
+    import '../scripts/engine.ts';
+  </script>
+</Layout>

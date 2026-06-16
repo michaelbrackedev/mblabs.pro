@@ -1,0 +1,18 @@
+# build output
+dist/
+.astro/
+
+# deps
+node_modules/
+
+# generated at build time from tools/design (prebuild/predev hook)
+src/generated/
+
+# playwright validation captures
+tools/shots/
+
+# env / os
+.env
+.env.*
+.DS_Store
+*.log

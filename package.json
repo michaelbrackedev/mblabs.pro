@@ -1,0 +1,23 @@
+{
+  "name": "mblabs-pro",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MBLabs — Michaël Bracké · portfolio one-pager (Azure integration · AI-augmented delivery · full-stack)",
+  "scripts": {
+    "predev": "node tools/transform.mjs",
+    "dev": "astro dev",
+    "prebuild": "node tools/transform.mjs",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "shots": "node tools/screenshots.mjs"
+  },
+  "dependencies": {
+    "astro": "^6.4.7"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,74 @@
+/* MBLabs.pro — global stylesheet.
+   Base + keyframes ported verbatim from the design source <style> block, plus the
+   white-default accent and a couple of a11y/robustness rules. */
+
+html, body { margin: 0; padding: 0; background: #0B0B0B; }
+*, *::before, *::after { box-sizing: border-box; }
+::selection { background: var(--mb-accent, #C7F23C); color: #0B0B0B; }
+body { -webkit-font-smoothing: antialiased; }
+
+/* Accent is a CSS variable, default WHITE (the locked direction). The engine swaps it
+   to lime / cyan / orange. Every `var(--mb-accent,#C7F23C)` in the markup resolves here. */
+#mb-root { --mb-accent: #FFFFFF; }
+
+/* Custom cursor hides the native one only on fine pointers where we draw our own. */
+@media (pointer: fine) {
+  #mb-root.mb-cursor-on, #mb-root.mb-cursor-on * { cursor: none; }
+}
+
+/* Keep focus visible for keyboard users even with the custom cursor. */
+:where(a, button, input, textarea):focus-visible {
+  outline: 2px solid var(--mb-accent, #C7F23C);
+  outline-offset: 2px;
+}
+
+/* Respect reduced-motion: stop ambient/continuous animation, keep content fully visible. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes mbMarqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes mbMarqueeR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@keyframes mbRevUp { from { opacity: 0; transform: translateY(46px); } to { opacity: 1; transform: none; } }
+@keyframes mbRevLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: none; } }
+@keyframes mbGrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes mbHiX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes mbBlink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+@keyframes mbFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(9px); } }
+@keyframes mbGlow { 0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--mb-accent,#C7F23C) 45%, transparent); } 50% { box-shadow: 0 0 34px 4px color-mix(in srgb, var(--mb-accent,#C7F23C) 35%, transparent); } }
+@keyframes mbPulseDot { 0%,100% { opacity: .45; transform: scale(.9); } 50% { opacity: 1; transform: scale(1.3); } }
+@keyframes mbHeroFade { to { opacity: .18; transform: translateY(-46px) scale(.965); } }
+@keyframes mbSpin { to { transform: rotate(360deg); } }
+@keyframes mbDrift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes mbEnter { from { opacity: 0; transform: translateY(42px); } to { opacity: 1; transform: none; } }
+@keyframes mbEnterHi { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes mbEnterLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes mbLetterIn { from { opacity: 0; transform: translateY(46px) rotate(4deg); filter: blur(7px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes mbHeroIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes mbParaUp { from { transform: translateY(0); } to { transform: translateY(-110px); } }
+@keyframes mbGhostPara { from { transform: translate(-50%,-50%) translateY(0); } to { transform: translate(-50%,-50%) translateY(86px); } }
+@keyframes mbParaSlow { from { transform: translateY(-54px); } to { transform: translateY(70px); } }
+@keyframes mbSweepL { from { transform: translateX(8%); } to { transform: translateX(-30%); } }
+@keyframes mbSweepR { from { transform: translateX(-30%); } to { transform: translateX(8%); } }
+@keyframes mbNodeIn { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: none; } }
+@keyframes mbCap { 0% { opacity: 0; transform: translateY(22px); } 16% { opacity: 1; transform: none; } 78% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-22px); } }
+@keyframes mbCapLast { 0% { opacity: 0; transform: translateY(22px); } 24% { opacity: 1; transform: none; } 100% { opacity: 1; transform: none; } }
+
+/* The accent-swatch tweak panel (our addition; mirrors the design's Tweaks). */
+.mb-tweaks {
+  position: fixed; right: 14px; bottom: 14px; z-index: 130;
+  display: flex; gap: 8px; align-items: center;
+  padding: 8px 10px; border-radius: 999px;
+  background: rgba(11,11,11,.72); border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.mb-tweaks button {
+  width: 18px; height: 18px; border-radius: 50%; cursor: pointer;
+  border: 1px solid rgba(255,255,255,.4); padding: 0; transition: transform .18s ease;
+}
+.mb-tweaks button:hover { transform: scale(1.18); }
+.mb-tweaks button[aria-pressed="true"] { box-shadow: 0 0 0 2px #0B0B0B, 0 0 0 4px currentColor; }

@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+
+const title = 'Michaël Bracké — MBLabs · Azure Integration & AI-augmented delivery';
+const description =
+  'Michaël Bracké (MBLabs) — full-stack engineer turned Azure integration specialist and AI-augmented delivery practitioner. Belgium-based, freelance & contract, remote across Europe. Let\'s build the integration layer.';
+
+// CSP as a meta fallback for hosts/preview without header support. The authoritative
+// policy ships in public/_headers. 'unsafe-inline' for style-src is required because the
+// ported design is built on inline styles; scripts stay 'self' only (no inline JS).
+const csp = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data:",
+  "connect-src 'self'",
+  "form-action 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+].join('; ');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content={csp} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0B0B0B" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Michaël Bracké" />
+    <link rel="canonical" href="https://mblabs.pro/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://mblabs.pro/" />
+    <meta property="og:site_name" content="MBLabs" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Anton&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Michaël Bracké',
+      jobTitle: 'Azure Integration Developer · Full-stack Engineer',
+      brand: { '@type': 'Brand', name: 'MBLabs' },
+      email: 'mailto:michael.bracke@mblabs.pro',
+      url: 'https://mblabs.pro/',
+      address: { '@type': 'PostalAddress', addressCountry: 'BE' },
+      sameAs: ['https://github.com/michaelbrackedev'],
+    })} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
