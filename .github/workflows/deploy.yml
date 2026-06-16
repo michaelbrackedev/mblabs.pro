@@ -28,6 +28,8 @@ jobs:
       - run: npm ci
       - run: npm run build   # `prebuild` regenerates src/generated from tools/design
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true   # auto-enable Pages (Source: GitHub Actions) if not already on
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
